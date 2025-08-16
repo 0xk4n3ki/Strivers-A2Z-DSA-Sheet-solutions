@@ -4,59 +4,51 @@ import (
 	"fmt"
 )
 
-// [OLD] https://takeuforward.org/binary-search/find-peak-element-ii
-// [OLD] https://takeuforward.org/arrays/rearrange-array-elements-by-sign/
-// [OLD] https://takeuforward.org/linked-list/delete-the-middle-node-of-the-linked-list
-// [NEW] https://takeuforward.org/arrays/capacity-to-ship-packages-within-d-days/
+// [OLD] https://takeuforward.org/data-structure/count-occurrences-in-sorted-array/
+// [OLD] https://takeuforward.org/data-structure/reverse-words-in-a-string/
+// [OLD] https://takeuforward.org/data-structure/find-intersection-of-two-linked-lists/
+// [NEW] https://takeuforward.org/arrays/painters-partition-problem/
 // [NEW] https://leetcode.com/problems/roman-to-integer/description/
-// [NEW] https://leetcode.com/problems/count-good-numbers/description/
-// [NEW] https://takeuforward.org/data-structure/palindrome-partitioning/
-// [NEW] https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/
+// [NEW] https://takeuforward.org/plus/dsa/problems/check-if-there-exists-a-subsequence-with-sum-k
+// [NEW] https://takeuforward.org/data-structure/word-search-leetcode/
+// [NEW] https://leetcode.com/problems/single-number/description/
 // [NEW] https://takeuforward.org/data-structure/implement-min-stack-o2n-and-on-space-complexity/
-// [NEW] https://leetcode.com/problems/sum-of-subarray-ranges/description/
-// [NEW] https://leetcode.com/problems/count-number-of-nice-subarrays/description/
+// [NEW] https://leetcode.com/problems/maximal-rectangle/description/
+// [NEW] https://leetcode.com/problems/binary-subarrays-with-sum/description/
 
 func main() {
-	arr := []int {1, 1, 2, 1, 1}
-	k := 3
-	ans := count(arr, k)
+	nums := []int {1, 0, 1, 0, 1}
+	goal := 2
+	ans := binary(nums, goal)
 	fmt.Printf("ans: %d\n", ans)
 
-	arr = []int {2, 4, 6}
-	k = 1
-	ans = count(arr, k)
-	fmt.Printf("ans: %d\n", ans)
-
-	arr = []int {2,2,2,1,2,2,1,2,2,2}
-	k = 2
-	ans = count(arr, k)
+	nums = []int {0, 0, 0, 0, 0}
+	goal = 0
+	ans = binary(nums, goal)
 	fmt.Printf("ans: %d\n", ans)
 }
 
-func count(arr []int, k int) int {
-	return nice(arr, k)-nice(arr, k-1)
+func binary(arr []int, goal int) int {
+	return sum(arr, goal)-sum(arr, goal-1)
 }
 
-func nice(arr []int, k int) int {
-	if k < 0 {
+
+func sum(arr []int, goal int) int {
+	if goal < 0 {
 		return 0
 	}
-	i, j := 0, 0
 	cnt := 0
-	ans := 0
+	sum := 0
+	i, j := 0, 0
 
 	for j < len(arr) {
-		cnt += arr[j] % 2
-
-		for cnt > k {
-			cnt -= arr[i]%2
+		sum += arr[j]%2
+		for sum > goal {
+			sum -= arr[i]
 			i++
 		}
-
-		if cnt <= k {
-			ans += j-i+1
-		}
+		cnt += j-i+1
 		j++
 	}
-	return ans
+	return cnt
 }
