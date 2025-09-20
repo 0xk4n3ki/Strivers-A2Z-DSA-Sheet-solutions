@@ -276,6 +276,11 @@ var Heaps = module{
 	"https://takeuforward.org/data-structure/replace-elements-by-its-rank-in-the-array/",
 }
 
+var greedy = module{
+	"https://takeuforward.org/data-structure/assign-cookies",
+	"https://takeuforward.org/Greedy/lemonade-change",
+}
+
 var modules = []module{
 	// basicMaths,
 	// recursion,
