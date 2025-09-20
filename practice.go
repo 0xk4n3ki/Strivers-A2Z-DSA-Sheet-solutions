@@ -267,6 +267,12 @@ var slidingWindow = module{
 	"https://leetcode.com/problems/count-number-of-nice-subarrays/description/",
 }
 
+var Heaps = module{
+	"https://takeuforward.org/data-structure/introduction-to-priority-queues-using-binary-heaps",
+	"https://takeuforward.org/plus/dsa/problems/check-if-an-array-represents-a-min-heap-",
+	"https://takeuforward.org/plus/dsa/problems/convert-min-heap-to-max-heap",
+}
+
 var modules = []module{
 	// basicMaths,
 	// recursion,
