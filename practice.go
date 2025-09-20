@@ -272,6 +272,8 @@ var Heaps = module{
 	"https://takeuforward.org/plus/dsa/problems/check-if-an-array-represents-a-min-heap-",
 	"https://takeuforward.org/plus/dsa/problems/convert-min-heap-to-max-heap",
 	"https://takeuforward.org/data-structure/kth-largest-smallest-element-in-an-array/",
+	"https://www.geeksforgeeks.org/dsa/nearly-sorted-algorithm/",
+	"https://takeuforward.org/data-structure/replace-elements-by-its-rank-in-the-array/",
 }
 
 var modules = []module{
