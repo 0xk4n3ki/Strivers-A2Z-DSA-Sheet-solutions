@@ -3,18 +3,71 @@ package main
 import "fmt"
 
 func main() {
-	arr := []int {1, 2, 6, 4, 5, 3}
+	arr := []int{1, 2, 6, 4, 5, 3}
 	k := 3
 	fmt.Println(smallest(arr, k), largest(arr, k))
 
-	arr = []int {1, 2, 6, 4, 5}
+	arr = []int{1, 2, 6, 4, 5}
 	k = 3
 	fmt.Println(smallest(arr, k), largest(arr, k))
 }
 
-
-// n length priority queue
+// quick select algorithm
 func smallest(arr []int, k int) int {
+	return quickSelect(arr, 0, len(arr)-1, k-1)
+}
+
+func largest(arr []int, k int) int {
+	return quickSelect(arr, 0, len(arr)-1, len(arr)-k)
+}
+
+func quickSelect(arr []int, l, r, k int) int {
+	pivot, p := arr[r], l
+	for i := l; i < r; i++ {
+		if arr[i] <= pivot {
+			arr[i], arr[p] = arr[p], arr[i]
+			p++
+		}
+	}
+	arr[p], arr[r] = arr[r], arr[p]
+	if p > k {
+		return quickSelect(arr, l, p-1, k)
+	} else if p < k {
+		return quickSelect(arr, p+1, r, k)
+	} else {
+		return arr[p]
+	}
+}
+
+// method 3
+// k length priority queue
+func smallest3(arr []int, k int) int {
+	h := &MaxHeap{}
+	h.BuildHeap(arr[:k])
+	for i := k; i < len(arr); i++ {
+		if arr[i] < h.arr[0] {
+			h.arr[0] = arr[i]
+			h.heapifyDown(0)
+		}
+	}
+	return h.arr[0]
+}
+
+func largest3(arr []int, k int) int {
+	h := &MinHeap{}
+	h.BuildHeap(arr[:k])
+	for i := k; i < len(arr); i++ {
+		if arr[i] > h.arr[0] {
+			h.arr[0] = arr[i]
+			h.heapifyDown(0)
+		}
+	}
+	return h.arr[0]
+}
+
+// method 2
+// n length priority queue
+func smallest2(arr []int, k int) int {
 	h := &MinHeap{}
 	h.BuildHeap(arr)
 	for i := 0; i < k-1; i++ {
@@ -28,14 +81,14 @@ type MinHeap struct {
 }
 
 func (h *MinHeap) BuildHeap(arr []int) {
-	h.arr = append([]int {}, arr...)
+	h.arr = append([]int{}, arr...)
 	for i := len(arr)/2 - 1; i >= 0; i-- {
 		h.heapifyDown(i)
 	}
 }
 
 func (h *MinHeap) heapifyDown(i int) {
-	lastIndex := len(h.arr)-1
+	lastIndex := len(h.arr) - 1
 	for {
 		l, r := 2*i+1, 2*i+2
 		if l > lastIndex {
@@ -48,7 +101,7 @@ func (h *MinHeap) heapifyDown(i int) {
 		if h.arr[i] > h.arr[indexToCompare] {
 			h.arr[i], h.arr[indexToCompare] = h.arr[indexToCompare], h.arr[i]
 			i = indexToCompare
-		}else {
+		} else {
 			return
 		}
 	}
@@ -63,7 +116,7 @@ func (h *MinHeap) Pop() {
 	h.heapifyDown(0)
 }
 
-func largest(arr []int, k int) int {
+func largest2(arr []int, k int) int {
 	h := &MaxHeap{}
 	h.BuildHeap(arr)
 	for i := 0; i < k-1; i++ {
@@ -77,14 +130,14 @@ type MaxHeap struct {
 }
 
 func (h *MaxHeap) BuildHeap(arr []int) {
-	h.arr = append([]int {}, arr...)
+	h.arr = append([]int{}, arr...)
 	for i := len(arr)/2 - 1; i >= 0; i-- {
 		h.heapifyDown(i)
 	}
 }
 
 func (h *MaxHeap) heapifyDown(i int) {
-	lastIndex := len(h.arr)-1
+	lastIndex := len(h.arr) - 1
 	for {
 		l, r := 2*i+1, 2*i+2
 		if l > lastIndex {
@@ -97,7 +150,7 @@ func (h *MaxHeap) heapifyDown(i int) {
 		if h.arr[i] < h.arr[indexToCompare] {
 			h.arr[i], h.arr[indexToCompare] = h.arr[indexToCompare], h.arr[i]
 			i = indexToCompare
-		}else {
+		} else {
 			return
 		}
 	}
@@ -112,10 +165,7 @@ func (h *MaxHeap) Pop() {
 	h.heapifyDown(0)
 }
 
-
-
-
-
+// method 1
 // sorting method
 func smallest1(arr []int, k int) int {
 	quickSort(arr, 0, len(arr)-1)
