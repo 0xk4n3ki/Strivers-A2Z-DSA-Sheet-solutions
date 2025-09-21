@@ -281,6 +281,16 @@ var greedy = module{
 	"https://takeuforward.org/Greedy/lemonade-change",
 }
 
+var binaryTrees = module{
+	"https://leetcode.com/problems/binary-tree-preorder-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-inorder-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-postorder-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-level-order-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-preorder-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-inorder-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-postorder-traversal/description/",
+}
+
 var modules = []module{
 	// basicMaths,
 	// recursion,
