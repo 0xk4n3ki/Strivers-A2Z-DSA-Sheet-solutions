@@ -289,6 +289,9 @@ var binaryTrees = module{
 	"https://leetcode.com/problems/binary-tree-preorder-traversal/description/",
 	"https://leetcode.com/problems/binary-tree-inorder-traversal/description/",
 	"https://leetcode.com/problems/binary-tree-postorder-traversal/description/",
+	"https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/",
+	"https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/",
+	"https://takeuforward.org/data-structure/top-view-of-a-binary-tree/",
 }
 
 var modules = []module{
