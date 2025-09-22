@@ -307,6 +307,12 @@ var graphs = module{
 	"https://takeuforward.org/data-structure/depth-first-search-dfs/",
 }
 
+var DP = module{
+	"https://takeuforward.org/data-structure/dynamic-programming-climbing-stairs/",
+	"https://takeuforward.org/data-structure/dynamic-programming-frog-jump-dp-3/",
+	"https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/",
+}
+
 var modules = []module{
 	// basicMaths,
 	// recursion,
