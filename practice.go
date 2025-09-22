@@ -294,6 +294,19 @@ var binaryTrees = module{
 	"https://takeuforward.org/data-structure/top-view-of-a-binary-tree/",
 }
 
+var BST = module{
+	"https://leetcode.com/problems/search-in-a-binary-search-tree/description/",
+	"https://takeuforward.org/binary-search-tree/ceil-in-a-binary-search-tree/",
+	"https://takeuforward.org/binary-search-tree/floor-in-a-binary-search-tree/",
+	"https://leetcode.com/problems/insert-into-a-binary-search-tree/description/",
+}
+
+var graphs = module{
+	"https://takeuforward.org/graph/graph-representation-in-c/",
+	"https://takeuforward.org/graph/breadth-first-search-bfs-level-order-traversal/",
+	"https://takeuforward.org/data-structure/depth-first-search-dfs/",
+}
+
 var modules = []module{
 	// basicMaths,
 	// recursion,
