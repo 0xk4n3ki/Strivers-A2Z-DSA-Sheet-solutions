@@ -265,6 +265,11 @@ var slidingWindow = module{
 	"https://leetcode.com/problems/longest-repeating-character-replacement/description/",
 	"https://leetcode.com/problems/binary-subarrays-with-sum/description/",
 	"https://leetcode.com/problems/count-number-of-nice-subarrays/description/",
+	"https://takeuforward.org/data-structure/number-of-substring-containing-all-three-characters",
+	"https://takeuforward.org/data-structure/maximum-point-you-can-obtain-from-cards",
+	"https://takeuforward.org/data-structure/longest-substring-with-at-most-k-distinct-characters",
+	"https://takeuforward.org/data-structure/subarray-with-k-different-integers",
+	"https://leetcode.com/problems/minimum-window-substring/",
 }
 
 var Heaps = module{

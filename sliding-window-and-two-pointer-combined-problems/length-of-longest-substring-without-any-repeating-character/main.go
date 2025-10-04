@@ -1,4 +1,5 @@
 package main
+
 import "fmt"
 
 func main() {
@@ -27,7 +28,7 @@ func longSub(s string) int {
 	n := len(s)
 	ans := 0
 	i, j := 0, 0
-	hashSet := map[byte]int {}
+	hashSet := map[byte]int{}
 
 	for j < n {
 		if _, ok := hashSet[s[j]]; ok {
