@@ -270,6 +270,7 @@ var slidingWindow = module{
 	"https://takeuforward.org/data-structure/longest-substring-with-at-most-k-distinct-characters",
 	"https://takeuforward.org/data-structure/subarray-with-k-different-integers",
 	"https://leetcode.com/problems/minimum-window-substring/",
+	"https://www.geeksforgeeks.org/dsa/minimum-window-subsequence/",
 }
 
 var Heaps = module{
@@ -279,6 +280,8 @@ var Heaps = module{
 	"https://takeuforward.org/data-structure/kth-largest-smallest-element-in-an-array/",
 	"https://www.geeksforgeeks.org/dsa/nearly-sorted-algorithm/",
 	"https://takeuforward.org/data-structure/replace-elements-by-its-rank-in-the-array/",
+	"https://takeuforward.org/data-structure/merge-m-sorted-lists",
+	"https://takeuforward.org/data-structure/task-scheduler",
 }
 
 var greedy = module{
