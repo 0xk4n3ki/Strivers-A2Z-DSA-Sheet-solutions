@@ -1,71 +1,78 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// [OLD] https://leetcode.com/problems/largest-odd-number-in-string/description/
 // [OLD] https://takeuforward.org/data-structure/quick-sort-algorithm/
-// [OLD] https://takeuforward.org/plus/dsa/problems/find-pairs-with-given-sum-in-doubly-linked-list
 // [OLD] https://takeuforward.org/data-structure/segregate-even-and-odd-nodes-in-linkedlist
-// [NEW] https://takeuforward.org/arrays/minimum-days-to-make-m-bouquets/
-// [NEW] https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/
-// [NEW] https://takeuforward.org/plus/dsa/problems/generate-binary-strings-without-consecutive-1s
-// [NEW] https://takeuforward.org/data-structure/palindrome-partitioning/
-// [NEW] https://leetcode.com/problems/powx-n/description/
-// [NEW] https://takeuforward.org/data-structure/infix-to-prefix/
-// [NEW] https://takeuforward.org/data-structure/sliding-window-maximum/
-// [NEW] https://leetcode.com/problems/count-number-of-nice-subarrays/description/
-
+// [NEW] https://takeuforward.org/arrays/painters-partition-problem/
+// [NEW] https://leetcode.com/problems/roman-to-integer/description/
+// [NEW] https://takeuforward.org/data-structure/combination-sum-ii-find-all-unique-combinations/
+// [NEW] https://takeuforward.org/data-structure/n-queen-problem-return-all-distinct-solutions-to-the-n-queens-puzzle/
+// [NEW] https://leetcode.com/problems/count-primes/description/
+// [NEW] https://takeuforward.org/plus/dsa/problems/postfix-to-prefix-conversion
+// [NEW] https://leetcode.com/problems/sum-of-subarray-minimums/description/
+// [NEW] https://leetcode.com/problems/minimum-window-substring/
 
 func main() {
-	arr := []int {1, 2, 4, 5, 6, 8, 9}
-	target := 7
-	head, back := arr2dll(arr)
-	printdll(head)
-	fmt.Printf("ans: %v\n", pair(head, back, target))
+	boards := []int {5, 5, 5, 5}
+	k := 2
+	fmt.Printf("boards: %v, ans: %d\n", boards, calc(boards, k))
+
+	boards = []int {10, 20, 30, 40}
+	k = 2
+	fmt.Printf("boards: %v, ans: %d\n", boards, calc(boards, k))
 }
 
-func pair(head, back *Node, target int) [][]int {
-	next, prev := head, back
-	ans := [][]int {}
+func calc(boards []int, k int) int {
+	low, high := calcTimelimits(boards)
 
-	for next != prev {
-		x, y := next.val, prev.val
-		sum := x + y
+	for low <= high {
+		mid := (low+high)/2
 
-		if sum <= target {
-			if sum == target {
-				ans = append(ans, []int {x, y})
-			}
-			next = next.front
+		currK := calcTime(boards, mid)
+		fmt.Printf("curr: %d, low: %d, mid: %d, high: %d\n", currK, low, mid, high)
+
+		if currK <= k {
+			high = mid - 1
 		}else {
-			prev = prev.back
+			low = mid + 1
 		}
 	}
-	return ans
+	return low
 }
 
-type Node struct {
-	val int
-	front *Node
-	back *Node
-}
-
-func arr2dll(arr []int) (*Node, *Node) {
-	head := &Node{0, nil, nil}
-	curr := head
-
-	for _, i := range arr {
-		tmp := &Node{i, nil, curr}
-		curr.front = tmp
-		curr = tmp
+func calcTime(boards []int, time int) int {
+	if len(boards) == 0 {
+		return 0
 	}
+	paintersNum := 0
+	sum := 0
 
-	head.front.back = nil
-	return head.front, curr
+	for _, i := range boards {
+		if sum + i > time {
+			sum = i
+			paintersNum += 1
+		} else {
+			sum += i
+		}
+	}
+	if sum > 0 {
+		paintersNum++
+	}
+	return paintersNum
 }
 
-func printdll(head *Node) {
-	for head != nil {
-		fmt.Printf("%p %v\n", head, head)
-		head = head.front
+func calcTimelimits(boards []int) (int, int) {
+	min := 0
+	max := 0
+	for _, i := range boards {
+		max += i
+		if min < i {
+			min = i
+		}
 	}
+	return min, max
 }
