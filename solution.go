@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 // [OLD] https://leetcode.com/problems/largest-odd-number-in-string/description/
@@ -17,86 +18,39 @@ import (
 // [NEW] https://leetcode.com/problems/minimum-window-substring/
 
 
-func main() {
-	s := "III"
-	fmt.Printf("s: %s, ans: %d\n", s, calc(s))
+func main () {
+	arr := []int {10, 1, 2, 7, 6, 1, 5}
+	target := 8
+	fmt.Printf("arr: %v, target: %d, ans: %v\n", arr, target, calc(arr, target))
 
-	s = "LVIII"
-	fmt.Printf("s: %s, ans: %d\n", s, calc(s))
-
-	s = "MCMXCIV"
-	fmt.Printf("s: %s, ans: %d\n", s, calc(s))
+	arr = []int {2, 5, 2, 1, 2}
+	target = 5
+	fmt.Printf("arr: %v, target: %d, ans: %v\n", arr, target, calc(arr, target))
 }
 
-func calc(s string) int {
-	values := map[byte]int {
-		'I' : 1,
-		'V' : 5,
-		'X': 10,
-		'L' : 50,
-		'C' : 100,
-		'D' : 500,
-		'M' : 1000,
-	}
-
-	ans := 0
-	for i := 0; i < len(s); i++ {
-		if i+1 < len(s) && values[s[i]] < values[s[i+1]] {
-			ans -= values[s[i]]
-		}else {
-			ans += values[s[i]]
-		}
-	}
+func calc(arr []int, target int) [][]int {
+	sort.Ints(arr)
+	ans := [][]int {}
+	curr := []int {}
+	backtracking(0, target, arr, &ans, &curr)
 	return ans
 }
 
+func backtracking(index, target int, arr []int, ans *[][]int, curr *[]int) {
+	if target == 0 {
+		*ans = append(*ans, append([]int {}, *curr...));
+		return
+	}
 
-// func calc(s string) int {
-// 	ans := 0
-
-// 	for i := 0; i < len(s); i ++ {
-// 		c := s[i]
-
-// 		switch c {
-// 		case 'I':
-// 			if i+1 < len(s) && s[i+1] == 'V' {
-// 				ans += 4
-// 				i++
-// 			}else if i+1 < len(s) && s[i+1] == 'X' {
-// 				ans += 9
-// 				i++
-// 			}else {
-// 				ans += 1
-// 			}
-// 		case 'V':
-// 			ans += 5
-// 		case 'X':
-// 			if i+1 < len(s) && s[i+1] == 'L' {
-// 				ans += 40
-// 				i++
-// 			}else if i+1 < len(s) && s[i+1] == 'C' {
-// 				ans += 90
-// 				i++
-// 			}else {
-// 				ans += 10
-// 			}
-// 		case 'L':
-// 			ans += 50
-// 		case 'C':
-// 			if i+1 < len(s) && s[i+1] == 'D' {
-// 				ans += 400
-// 				i++
-// 			}else if i+1 < len(s) && s[i+1] == 'M' {
-// 				ans += 900
-// 				i++
-// 			}else {
-// 				ans += 100
-// 			}
-// 		case 'D':
-// 			ans += 500
-// 		case 'M':
-// 			ans += 1000
-// 		}
-// 	}
-// 	return ans
-// }
+	for i := index; i < len(arr); i++ {
+		if i > index && arr[i] == arr[i-1] {
+			continue
+		}
+		if arr[i] > target {
+			break
+		}
+		*curr = append(*curr, arr[i])
+		backtracking(i+1, target-arr[i], arr, ans, curr)
+		*curr = (*curr)[:len(*curr)-1]
+	}
+}
