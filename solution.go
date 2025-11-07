@@ -16,63 +16,87 @@ import (
 // [NEW] https://leetcode.com/problems/sum-of-subarray-minimums/description/
 // [NEW] https://leetcode.com/problems/minimum-window-substring/
 
+
 func main() {
-	boards := []int {5, 5, 5, 5}
-	k := 2
-	fmt.Printf("boards: %v, ans: %d\n", boards, calc(boards, k))
+	s := "III"
+	fmt.Printf("s: %s, ans: %d\n", s, calc(s))
 
-	boards = []int {10, 20, 30, 40}
-	k = 2
-	fmt.Printf("boards: %v, ans: %d\n", boards, calc(boards, k))
+	s = "LVIII"
+	fmt.Printf("s: %s, ans: %d\n", s, calc(s))
+
+	s = "MCMXCIV"
+	fmt.Printf("s: %s, ans: %d\n", s, calc(s))
 }
 
-func calc(boards []int, k int) int {
-	low, high := calcTimelimits(boards)
+func calc(s string) int {
+	values := map[byte]int {
+		'I' : 1,
+		'V' : 5,
+		'X': 10,
+		'L' : 50,
+		'C' : 100,
+		'D' : 500,
+		'M' : 1000,
+	}
 
-	for low <= high {
-		mid := (low+high)/2
-
-		currK := calcTime(boards, mid)
-		fmt.Printf("curr: %d, low: %d, mid: %d, high: %d\n", currK, low, mid, high)
-
-		if currK <= k {
-			high = mid - 1
+	ans := 0
+	for i := 0; i < len(s); i++ {
+		if i+1 < len(s) && values[s[i]] < values[s[i+1]] {
+			ans -= values[s[i]]
 		}else {
-			low = mid + 1
+			ans += values[s[i]]
 		}
 	}
-	return low
+	return ans
 }
 
-func calcTime(boards []int, time int) int {
-	if len(boards) == 0 {
-		return 0
-	}
-	paintersNum := 0
-	sum := 0
 
-	for _, i := range boards {
-		if sum + i > time {
-			sum = i
-			paintersNum += 1
-		} else {
-			sum += i
-		}
-	}
-	if sum > 0 {
-		paintersNum++
-	}
-	return paintersNum
-}
+// func calc(s string) int {
+// 	ans := 0
 
-func calcTimelimits(boards []int) (int, int) {
-	min := 0
-	max := 0
-	for _, i := range boards {
-		max += i
-		if min < i {
-			min = i
-		}
-	}
-	return min, max
-}
+// 	for i := 0; i < len(s); i ++ {
+// 		c := s[i]
+
+// 		switch c {
+// 		case 'I':
+// 			if i+1 < len(s) && s[i+1] == 'V' {
+// 				ans += 4
+// 				i++
+// 			}else if i+1 < len(s) && s[i+1] == 'X' {
+// 				ans += 9
+// 				i++
+// 			}else {
+// 				ans += 1
+// 			}
+// 		case 'V':
+// 			ans += 5
+// 		case 'X':
+// 			if i+1 < len(s) && s[i+1] == 'L' {
+// 				ans += 40
+// 				i++
+// 			}else if i+1 < len(s) && s[i+1] == 'C' {
+// 				ans += 90
+// 				i++
+// 			}else {
+// 				ans += 10
+// 			}
+// 		case 'L':
+// 			ans += 50
+// 		case 'C':
+// 			if i+1 < len(s) && s[i+1] == 'D' {
+// 				ans += 400
+// 				i++
+// 			}else if i+1 < len(s) && s[i+1] == 'M' {
+// 				ans += 900
+// 				i++
+// 			}else {
+// 				ans += 100
+// 			}
+// 		case 'D':
+// 			ans += 500
+// 		case 'M':
+// 			ans += 1000
+// 		}
+// 	}
+// 	return ans
+// }
