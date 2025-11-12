@@ -18,39 +18,3 @@ import (
 // [NEW] https://leetcode.com/problems/minimum-window-substring/
 
 
-func main () {
-	arr := []int {10, 1, 2, 7, 6, 1, 5}
-	target := 8
-	fmt.Printf("arr: %v, target: %d, ans: %v\n", arr, target, calc(arr, target))
-
-	arr = []int {2, 5, 2, 1, 2}
-	target = 5
-	fmt.Printf("arr: %v, target: %d, ans: %v\n", arr, target, calc(arr, target))
-}
-
-func calc(arr []int, target int) [][]int {
-	sort.Ints(arr)
-	ans := [][]int {}
-	curr := []int {}
-	backtracking(0, target, arr, &ans, &curr)
-	return ans
-}
-
-func backtracking(index, target int, arr []int, ans *[][]int, curr *[]int) {
-	if target == 0 {
-		*ans = append(*ans, append([]int {}, *curr...));
-		return
-	}
-
-	for i := index; i < len(arr); i++ {
-		if i > index && arr[i] == arr[i-1] {
-			continue
-		}
-		if arr[i] > target {
-			break
-		}
-		*curr = append(*curr, arr[i])
-		backtracking(i+1, target-arr[i], arr, ans, curr)
-		*curr = (*curr)[:len(*curr)-1]
-	}
-}

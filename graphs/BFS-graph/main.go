@@ -16,77 +16,81 @@ import "fmt"
 
 func main() {
 	var n, m int
+	fmt.Print("Enter nnumber of nodes(n) and edges(m): ")
 	fmt.Scan(&n, &m)
 
-	adj := make([][]int, n+1)
-	for i := 0; i < m; i++ {
-		var u, v int
-		fmt.Scan(&u, &v)
+	adjList := make([][]int, n+1)
 
-		adj[u] = append(adj[u], v)
-		adj[v] = append(adj[v], u)
+	for i := 1; i <= m; i++ {
+		var j, k int
+		fmt.Printf("[%d]: ", i)
+		fmt.Scan(&j, &k)
+
+		adjList[j] = append(adjList[j], k)
+		adjList[k] = append(adjList[k], j)
 	}
 
-	fmt.Printf("adj: %v\n", adj)
 	ans := []int {}
 	vis := make([]int, n+1)
-	for i := 1; i <= n; i++ { // for the connected components 
+
+	for i := 1; i <= n; i++ {
 		if vis[i] != 1 {
-			vis[i] = 1
-			ans = append(ans, bfs(adj, vis, i)...)
-			fmt.Printf("vis: %v\n", vis)
+			ans = append(ans, bfs(adjList, &vis, i)...)
 		}
 	}
 
 	fmt.Printf("ans: %v\n", ans)
 }
 
-func bfs(adj [][]int, vis []int, start int) []int {
+func bfs(adjList [][]int, vis *[]int, t int) []int {
 	q := new(Queue)
-	q.Push(start)
-	bfs := []int {}
+	ans := []int {}
+
+	q.Push(t)
+	(*vis)[t] = 1
 
 	for !q.IsEmpty() {
-		node := q.Top()
+		tmp := q.Top()
+		ans = append(ans, tmp)
 		q.Pop()
-		bfs = append(bfs, node)
 
-		for _, i := range adj[node] {
-			if vis[i] != 1 {
-				vis[i] = 1
+		for _, i := range adjList[tmp] {
+			if (*vis)[i] != 1 {
 				q.Push(i)
+				(*vis)[i] = 1
 			}
 		}
 	}
-	return bfs
+	return ans
 }
 
+
 type Queue struct {
-	arr []int
+	Arr []int
+}
+
+func (q *Queue) Push(data int) {
+	q.Arr = append(q.Arr, data)
 }
 
 func (q *Queue) Size() int {
-	return len(q.arr)
+	return len(q.Arr)
 }
 
 func (q *Queue) IsEmpty() bool {
 	return q.Size() == 0
 }
 
-func (q *Queue) Push(val int) {
-	q.arr = append(q.arr, val)
-}
-
 func (q *Queue) Top() int {
 	if q.IsEmpty() {
 		return -1
 	}
-	return q.arr[q.Size()-1]
+	return q.Arr[0]
 }
 
 func (q *Queue) Pop() {
 	if q.IsEmpty() {
 		return
 	}
-	q.arr = q.arr[:q.Size()-1]
+	q.Arr = q.Arr[1:]
 }
