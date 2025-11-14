@@ -318,6 +318,10 @@ var graphs = module{
 	"https://takeuforward.org/graph/graph-representation-in-c/",
 	"https://takeuforward.org/graph/breadth-first-search-bfs-level-order-traversal/",
 	"https://takeuforward.org/data-structure/depth-first-search-dfs/",
+	"https://takeuforward.org/data-structure/number-of-provinces/",
+	"https://takeuforward.org/data-structure/connected-components",
+	"https://takeuforward.org/data-structure/rotten-oranges-min-time-to-rot-all-oranges-bfs/",
+	"https://takeuforward.org/graph/flood-fill-algorithm-graphs/",
 }
 
 var DP = module{
