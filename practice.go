@@ -322,6 +322,10 @@ var graphs = module{
 	"https://takeuforward.org/data-structure/connected-components",
 	"https://takeuforward.org/data-structure/rotten-oranges-min-time-to-rot-all-oranges-bfs/",
 	"https://takeuforward.org/graph/flood-fill-algorithm-graphs/",
+	"https://takeuforward.org/data-structure/detect-cycle-in-an-undirected-graph-using-bfs/",
+	"https://takeuforward.org/data-structure/detect-cycle-in-an-undirected-graph-using-dfs/",
+	"https://takeuforward.org/graph/distance-of-nearest-cell-having-1/",
+	"https://takeuforward.org/graph/surrounded-regions-replace-os-with-xs/",
 }
 
 var DP = module{
