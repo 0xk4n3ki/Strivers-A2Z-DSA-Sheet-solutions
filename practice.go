@@ -326,6 +326,8 @@ var graphs = module{
 	"https://takeuforward.org/data-structure/detect-cycle-in-an-undirected-graph-using-dfs/",
 	"https://takeuforward.org/graph/distance-of-nearest-cell-having-1/",
 	"https://takeuforward.org/graph/surrounded-regions-replace-os-with-xs/",
+	"https://takeuforward.org/graph/number-of-enclaves/",
+	"https://takeuforward.org/graph/word-ladder-i-g-29/",
 }
 
 var DP = module{
